@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://0cewjlro303a"]
+
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_nfxjh"]
+[ext_resource type="Texture2D" uid="uid://c5vtb56pxhhvu" path="res://Assets/edw7f7lvzu3c1.jpeg" id="2_prfw5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5rmd3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejvqd"]
+albedo_texture = ExtResource("2_prfw5")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_biuml"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_odeu7"]
+
+[node name="Player" type="CharacterBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_nfxjh")
+attackRange = 5.0
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5rmd3")
+surface_material_override/0 = SubResource("StandardMaterial3D_ejvqd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_biuml")
+
+[node name="Navigator" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Cursor" type="MeshInstance3D" parent="UI"]
+transform = Transform3D(0.27, 0, 0, 0, 0.2, 0, 0, 0, -0.23, 0.000176907, 0.0910156, -0.0386295)
+mesh = SubResource("CylinderMesh_odeu7")
+skeleton = NodePath("../..")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.666064, 0.745895, 0, -0.745895, 0.666064, 0, 12.7317, 9.98028)

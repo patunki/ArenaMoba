@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://dhqhdpj8iy8g8"]
+
+[ext_resource type="PackedScene" uid="uid://0cewjlro303a" path="res://Scenes/Player.tscn" id="1_qv5ut"]
+[ext_resource type="Texture2D" uid="uid://bi061ijpthiv1" path="res://Assets/gaben.jpg" id="2_y44a5"]
+[ext_resource type="PackedScene" uid="uid://l62pcmckeabg" path="res://Scenes/EntityTester.tscn" id="3_31c25"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qw7nn"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ih3wm"]
+sky_material = SubResource("ProceduralSkyMaterial_qw7nn")
+
+[sub_resource type="Environment" id="Environment_ngdvn"]
+background_mode = 2
+sky = SubResource("Sky_ih3wm")
+tonemap_mode = 2
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_pguxj"]
+vertices = PackedVector3Array(0.124937, 0.463962, -0.615624, -1.12506, 0.463962, -0.615624, -1.62506, 0.463962, 0.384376, 1.12494, 0.463962, 0.634376, -3.37506, 0.463962, -1.61562, -2.87506, 0.463962, -1.86562, -3.12506, 0.463962, -3.61562, -4.37506, 0.463962, -3.61562, -3.12506, 0.463962, 0.384376, -3.37506, 0.463962, -1.61562, -4.37506, 0.463962, -3.61562, -4.37506, 0.463962, 3.63438, -1.62506, 0.463962, 0.384376, -3.12506, 0.463962, 0.384376, -4.37506, 0.463962, 3.63438, 1.37494, 0.463962, 3.63438, 1.12494, 0.463962, 0.634376, -1.12506, 0.463962, -0.615624, 0.124937, 0.463962, -0.615624, 0.624937, 0.463962, -1.61562, -1.62506, 0.463962, -1.86562, 4.37494, 0.463962, -3.61562, 2.87494, 0.463962, -1.86562, 3.37494, 0.463962, -1.36562, -3.12506, 0.463962, -3.61562, -2.87506, 0.463962, -1.86562, -1.62506, 0.463962, -1.86562, 4.37494, 0.463962, -3.61562, -3.12506, 0.463962, -3.61562, -1.62506, 0.463962, -1.86562, 0.624937, 0.463962, -1.61562, 2.87494, 0.463962, -1.86562, 3.37494, 0.463962, -1.36562, 3.62494, 0.463962, 3.63438, 4.37494, 0.463962, 3.63438, 4.37494, 0.463962, -3.61562, 1.37494, 2.46396, -0.615624, 1.87494, 2.46396, -0.115624, 2.37494, 2.46396, -0.615624)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(12, 16, 13), PackedInt32Array(13, 16, 15), PackedInt32Array(13, 15, 14), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 20), PackedInt32Array(21, 23, 22), PackedInt32Array(26, 25, 24), PackedInt32Array(31, 30, 27), PackedInt32Array(27, 30, 29), PackedInt32Array(27, 29, 28), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(38, 37, 36)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_boeag"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x8av2"]
+albedo_texture = ExtResource("2_y44a5")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gx7k1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_e2m4p"]
+
+[node name="Map" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ngdvn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_qv5ut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.72751, 0.590461, 8.12307)
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(2.7, 0, 0, 0, 1, 0, 0, 0, 3.3, 0, 0, 0)
+navigation_mesh = SubResource("NavigationMesh_pguxj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(9.75013, 0, 0, 0, 0.0720759, 0, 0, 0, 8.23125, 0, 0, 0)
+mesh = SubResource("BoxMesh_boeag")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_x8av2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_gx7k1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34111, 0.975211, -0.725047)
+mesh = SubResource("CylinderMesh_e2m4p")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16407, 0.975211, -0.725047)
+mesh = SubResource("CylinderMesh_e2m4p")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16407, 0.975211, 0.0848256)
+mesh = SubResource("CylinderMesh_e2m4p")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16407, 0.975211, 1.04251)
+mesh = SubResource("CylinderMesh_e2m4p")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16407, 0.975211, 2.02205)
+mesh = SubResource("CylinderMesh_e2m4p")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43275, 1.05729, 2.59242)
+mesh = SubResource("CylinderMesh_e2m4p")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43275, 1.05729, 3.23705)
+mesh = SubResource("CylinderMesh_e2m4p")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31835, 1.05729, -0.603088)
+mesh = SubResource("CylinderMesh_e2m4p")
+
+[node name="Entity" parent="." instance=ExtResource("3_31c25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.562602, -3.522)
+health = 10.0
