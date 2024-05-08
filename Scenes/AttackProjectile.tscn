@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc64widv31rgc"]
+
+[ext_resource type="Script" path="res://Scripts/AttackProjectile.cs" id="1_xqrov"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0facs"]
+lightmap_size_hint = Vector2i(6, 7)
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbpey"]
+radius = 0.108829
+height = 0.621741
+
+[node name="AttackProjectile" type="CharacterBody3D"]
+script = ExtResource("1_xqrov")
+
+[node name="Graphic" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0540788, 0.998537, 0, -0.998537, 0.0540788, 0, 0, 0)
+mesh = SubResource("CylinderMesh_0facs")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(-0.979382, -0.08723, 0.182217, -0.179975, -0.0329807, -0.983118, 0.0917671, -0.995642, 0.0166015, 0.0228759, 0.0311438, 0.0131412)
+shape = SubResource("CapsuleShape3D_hbpey")
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.979382, -0.08723, 0.182217, -0.179975, -0.0329807, -0.983118, 0.0917671, -0.995642, 0.0166015, 0.0228759, 0.0311438, 0.0131412)
+shape = SubResource("CapsuleShape3D_hbpey")
+disabled = true
+
+[connection signal="body_entered" from="Hurtbox" to="." method="OnHurtboxBodyEntered"]

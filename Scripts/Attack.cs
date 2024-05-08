@@ -3,7 +3,8 @@ using System;
 
 public enum AttackType {
     Ranged,
-    Melee
+    Melee,
+    Ability
 }
 public partial class Attack : Node
 {

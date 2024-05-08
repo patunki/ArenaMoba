@@ -36,6 +36,8 @@ environment = SubResource("Environment_ngdvn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 0.192
+light_indirect_energy = 0.192
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_qv5ut")]
@@ -46,6 +48,7 @@ axis_lock_linear_z = false
 axis_lock_angular_x = false
 axis_lock_angular_y = false
 axis_lock_angular_z = false
+attackRange = 10.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(2.7, 0, 0, 0, 1, 0, 0, 0, 3.3, 0, 0, 0)
@@ -96,4 +99,6 @@ mesh = SubResource("CylinderMesh_e2m4p")
 
 [node name="Entity" parent="." instance=ExtResource("3_31c25")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.562602, -3.522)
-health = 10.0
+speed = 5.0
+maxHealth = 20.0
+health = 20.0

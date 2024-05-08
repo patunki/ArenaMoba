@@ -21,6 +21,8 @@ public partial class Entity : CharacterBody3D
     public float attackTime;
     [Export]
     public float attackRange;
+    [Export]
+    public float attackDamage = 5;
 
     void OnAreaInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 norman, int shapeIdx){
         if (Input.IsActionJustPressed("RightClick") && camera.GetParent() is Player){
@@ -31,13 +33,13 @@ public partial class Entity : CharacterBody3D
 
     public void TakeDamage(Attack attack){
         health -= attack.damage;
-        GD.Print(health);
+        GD.Print("health: ", health);
             if (health <= 0){
-                GD.Print(attack.damage);
-                GD.Print ("Dead");
+                GD.Print("damage: ", attack.damage);
+                GD.Print (Name," Dead");
                 QueueFree();
             }else{
-                GD.Print(attack.damage);
+                GD.Print("damage: ", attack.damage);
             }
     }
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://l62pcmckeabg"]
 
-[ext_resource type="Script" path="res://Scripts/Entity.cs" id="1_dbj2w"]
+[ext_resource type="Script" path="res://Scripts/EntityTester.cs" id="1_dxxhs"]
 [ext_resource type="Texture2D" uid="uid://cakg60mvtuc3p" path="res://Assets/ksnip_20231203-044818.png" id="2_4dlf0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ofvlc"]
@@ -13,7 +13,7 @@ albedo_texture = ExtResource("2_4dlf0")
 [sub_resource type="BoxShape3D" id="BoxShape3D_gre01"]
 
 [node name="Entity" type="CharacterBody3D"]
-script = ExtResource("1_dbj2w")
+script = ExtResource("1_dxxhs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ofvlc")
