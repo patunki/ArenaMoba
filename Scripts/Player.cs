@@ -134,6 +134,8 @@ public partial class Player : Entity
         canAttack = true;
     }
 
+
+
 }
 
 //float distance = GlobalPosition.DistanceTo(_target.GlobalPosition);

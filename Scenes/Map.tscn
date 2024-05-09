@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhqhdpj8iy8g8"]
+[gd_scene load_steps=13 format=3 uid="uid://dhqhdpj8iy8g8"]
 
+[ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_0rrl2"]
+[ext_resource type="PackedScene" uid="uid://bkm7agvp2et53" path="res://Scenes/Client.tscn" id="2_a0ftl"]
 [ext_resource type="Texture2D" uid="uid://bi061ijpthiv1" path="res://Assets/gaben.jpg" id="2_y44a5"]
-[ext_resource type="PackedScene" uid="uid://bkm7agvp2et53" path="res://Scenes/Client.tscn" id="3_1ea2i"]
 [ext_resource type="PackedScene" uid="uid://l62pcmckeabg" path="res://Scenes/EntityTester.tscn" id="3_31c25"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qw7nn"]
@@ -31,6 +32,8 @@ albedo_texture = ExtResource("2_y44a5")
 [sub_resource type="CylinderMesh" id="CylinderMesh_e2m4p"]
 
 [node name="Map" type="Node3D"]
+script = ExtResource("1_0rrl2")
+playerScene = ExtResource("2_a0ftl")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ngdvn")
@@ -113,5 +116,10 @@ speed = 0.0
 maxHealth = 20.0
 health = 20.0
 
-[node name="Client" parent="." instance=ExtResource("3_1ea2i")]
-transform = Transform3D(-1, 0, 0.000279278, 0, 1, 0, -0.000279278, 0, -1, 0, 0, 0)
+[node name="PlayerSpawnPoints" type="Node3D" parent="."]
+
+[node name="0" type="Node3D" parent="PlayerSpawnPoints" groups=["PlayerSpawnPoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6332, 0.308617, 0)
+
+[node name="1" type="Node3D" parent="PlayerSpawnPoints" groups=["PlayerSpawnPoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1941, 0, -2.94325)
