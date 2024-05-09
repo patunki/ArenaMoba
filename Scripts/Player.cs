@@ -10,6 +10,7 @@ public partial class Player : Entity
     NavigationAgent3D navigator;
     Entity target;
     PackedScene projectile;
+    PackedScene fireball;
     Node3D game;
     Timer attackTimer;
 
@@ -23,6 +24,7 @@ public partial class Player : Entity
         camera = GetNode<Camera3D>("Camera");
         navigator = GetNode<NavigationAgent3D>("Navigator");
         projectile = GD.Load<PackedScene>("res://Scenes/AttackProjectile.tscn");
+        fireball = GD.Load<PackedScene>("res://Scenes/Fireball.tscn");
         game = GetNode<Node3D>("/root/Map");
         indicator.Hide();
         attackTimer = new Timer();
@@ -44,6 +46,15 @@ public partial class Player : Entity
             indicator.GlobalPosition = clickPos;
             navigator.TargetPosition = clickPos;
             indicator.Show();
+        }
+
+        if (Input.IsActionJustPressed("Q")){
+            Vector3 dir = GlobalPosition.DirectionTo(GetCursorPos());
+            Fireball instance = (Fireball)fireball.Instantiate();
+            instance.host = this;
+            game.AddChild(instance);
+            instance.direction = GlobalPosition.DirectionTo(GetCursorPos());
+            instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
         }
     }
 
