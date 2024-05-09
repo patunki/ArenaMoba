@@ -1,16 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc64widv31rgc"]
+[gd_scene load_steps=6 format=3 uid="uid://bc64widv31rgc"]
 
 [ext_resource type="Script" path="res://Scripts/AttackProjectile.cs" id="1_xqrov"]
+[ext_resource type="Texture2D" uid="uid://c5vtb56pxhhvu" path="res://Assets/edw7f7lvzu3c1.jpeg" id="2_vyd7y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ewq56"]
+albedo_texture = ExtResource("2_vyd7y")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0facs"]
 lightmap_size_hint = Vector2i(6, 7)
-top_radius = 0.1
+material = SubResource("StandardMaterial3D_ewq56")
+top_radius = 0.0
 bottom_radius = 0.1
 height = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbpey"]
 radius = 0.108829
-height = 0.621741
+height = 0.346587
 
 [node name="AttackProjectile" type="CharacterBody3D"]
 script = ExtResource("1_xqrov")

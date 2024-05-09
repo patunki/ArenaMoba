@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_nfxjh"]
 [ext_resource type="Texture2D" uid="uid://c5vtb56pxhhvu" path="res://Assets/edw7f7lvzu3c1.jpeg" id="2_prfw5"]
+[ext_resource type="ArrayMesh" uid="uid://wri0was2sjsx" path="res://Assets/FFH SUIT.obj" id="2_vmbei"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_5rmd3"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejvqd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2k6r"]
 albedo_texture = ExtResource("2_prfw5")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mdyo8"]
@@ -23,8 +22,9 @@ script = ExtResource("1_nfxjh")
 attackRange = 5.0
 
 [node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_5rmd3")
-surface_material_override/0 = SubResource("StandardMaterial3D_ejvqd")
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_e2k6r")
+mesh = ExtResource("2_vmbei")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_mdyo8")

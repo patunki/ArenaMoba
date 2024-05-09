@@ -23,6 +23,10 @@ window/size/viewport_height=1080
 
 project/assembly_name="ArenaMoba"
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 LeftClick={

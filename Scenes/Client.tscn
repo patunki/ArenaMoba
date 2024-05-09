@@ -19,6 +19,7 @@ attackRange = 10.0
 [node name="ClientCamera" type="Camera3D" parent="Player"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.700984, 0.713177, 0, -0.713177, 0.700984, 0, 18.4986, 14.459)
+fov = 40.7
 
 [node name="Interface" type="CanvasLayer" parent="."]
 

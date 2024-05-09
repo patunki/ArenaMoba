@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://wri0was2sjsx"
+path="res://.godot/imported/FFH SUIT.obj-8cf236025943a366f949448143d351ea.mesh"
+
+[deps]
+
+files=["res://.godot/imported/FFH SUIT.obj-8cf236025943a366f949448143d351ea.mesh"]
+
+source_file="res://Assets/FFH SUIT.obj"
+dest_files=["res://.godot/imported/FFH SUIT.obj-8cf236025943a366f949448143d351ea.mesh", "res://.godot/imported/FFH SUIT.obj-8cf236025943a366f949448143d351ea.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
