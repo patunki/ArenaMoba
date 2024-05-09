@@ -50,12 +50,7 @@ public partial class Player : Entity
             }
 
             if (Input.IsActionJustPressed("Q")){
-                Vector3 dir = GlobalPosition.DirectionTo(GetCursorPos());
-                Fireball instance = (Fireball)fireball.Instantiate();
-                instance.host = this;
-                game.AddChild(instance);
-                instance.direction = GlobalPosition.DirectionTo(GetCursorPos());
-                instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
+                Rpc("MpQ");
             }
         }
 
@@ -136,8 +131,15 @@ public partial class Player : Entity
     void ResetAttackTimer(){
         canAttack = true;
     }
-
-
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+    private void MpQ(){
+        Vector3 dir = GlobalPosition.DirectionTo(GetCursorPos());
+        Fireball instance = (Fireball)fireball.Instantiate();
+        instance.host = this;
+        game.AddChild(instance);
+        instance.direction = GlobalPosition.DirectionTo(GetCursorPos());
+        instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
+    }
 
 }
 
