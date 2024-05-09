@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://l62pcmckeabg"]
+[gd_scene load_steps=9 format=3 uid="uid://l62pcmckeabg"]
 
 [ext_resource type="Script" path="res://Scripts/EntityTester.cs" id="1_dxxhs"]
 [ext_resource type="Texture2D" uid="uid://cakg60mvtuc3p" path="res://Assets/ksnip_20231203-044818.png" id="2_4dlf0"]
@@ -10,6 +10,23 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnhnt"]
 albedo_texture = ExtResource("2_4dlf0")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3q1b"]
+rim_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fsnry"]
+_surfaces = [{
+"aabb": AABB(-0.528867, -0.528867, -0.528867, 1.05773, 1.05774, 1.05774),
+"attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 171, 170, 42, 63, 0, 0, 0, 0, 171, 170, 170, 62, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 171, 170, 42, 63, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 0, 63, 0, 0, 128, 63, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 171, 170, 42, 63, 0, 0, 0, 0, 171, 170, 170, 62, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 128, 63, 171, 170, 42, 63, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 128, 63, 171, 170, 170, 62, 0, 0, 0, 63, 171, 170, 42, 63, 0, 0, 0, 63, 171, 170, 42, 63, 0, 0, 0, 63, 0, 0, 128, 63, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 128, 63, 171, 170, 42, 63, 0, 0, 128, 63, 171, 170, 42, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 4, 0, 2, 0, 2, 0, 4, 0, 6, 0, 1, 0, 5, 0, 3, 0, 3, 0, 5, 0, 7, 0, 8, 0, 12, 0, 10, 0, 10, 0, 12, 0, 14, 0, 9, 0, 13, 0, 11, 0, 11, 0, 13, 0, 15, 0, 16, 0, 20, 0, 18, 0, 18, 0, 20, 0, 22, 0, 17, 0, 21, 0, 19, 0, 19, 0, 21, 0, 23, 0),
+"material": SubResource("StandardMaterial3D_t3q1b"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 255, 0, 128, 255, 255, 255, 255, 0, 0, 0, 128, 255, 127, 255, 191, 255, 255, 0, 128, 255, 255, 255, 255, 0, 0, 0, 128, 255, 127, 255, 191, 255, 255, 0, 128, 255, 255, 255, 255, 0, 0, 0, 128, 255, 127, 255, 191, 255, 255, 0, 128, 255, 255, 255, 255, 0, 0, 0, 128, 255, 127, 255, 191, 0, 128, 255, 255, 0, 0, 255, 191, 0, 128, 0, 0, 255, 255, 255, 191, 0, 128, 255, 255, 0, 0, 255, 191, 0, 128, 0, 0, 255, 255, 255, 191, 0, 128, 255, 255, 0, 0, 255, 191, 0, 128, 0, 0, 255, 255, 255, 191, 0, 128, 255, 255, 0, 0, 255, 191, 0, 128, 0, 0, 255, 255, 255, 191)
+}]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_gre01"]
 
 [node name="Entity" type="CharacterBody3D"]
@@ -18,9 +35,12 @@ script = ExtResource("1_dxxhs")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ofvlc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_wabpb")
 surface_material_override/0 = SubResource("StandardMaterial3D_jnhnt")
+
+[node name="Outline" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("ArrayMesh_fsnry")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -29,3 +49,5 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_gre01")
 
 [connection signal="input_event" from="Area3D" to="." method="OnAreaInputEvent"]
+[connection signal="mouse_entered" from="Area3D" to="." method="OnAreaMouseEntered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="OnAreaMouseExited"]

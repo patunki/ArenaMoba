@@ -6,9 +6,13 @@ public partial class EntityTester : Entity
     bool dires = true;
     Vector3 suunta;
     int count = 0;
+    MeshInstance3D outline;
     public override void _Ready()
     {
         suunta = new Vector3(0,0,1);
+        outline = GetNode<MeshInstance3D>("Model/Outline");
+        GD.Print(outline);
+        outline.Hide();
     }
 
     void Switcher(){
@@ -28,6 +32,14 @@ public partial class EntityTester : Entity
             Switcher();
         }
         Velocity = suunta * speed;
-        MoveAndSlide();
+        //MoveAndSlide();
+    }
+
+    void OnAreaMouseEntered(){
+        outline.Show();
+    } 
+    
+    void OnAreaMouseExited(){
+        outline.Hide();
     }
 }

@@ -24,6 +24,8 @@ public partial class Entity : CharacterBody3D
     [Export]
     public float attackDamage = 5;
 
+    public bool canAttack = true;
+
     void OnAreaInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 norman, int shapeIdx){
         if (Input.IsActionJustPressed("RightClick") && camera.GetParent() is Player){
             Player attacker = (Player)camera.GetParent();

@@ -58,9 +58,9 @@ public partial class Player : Entity
             return;
         }
         Vector3 targetPos = navigator.GetNextPathPosition();
-        model.LookAt(targetPos);
         Vector3 direction = GlobalPosition.DirectionTo(targetPos);
         Velocity = direction * speed;
+        model.LookAt(new Vector3(indicator.GlobalPosition.X, 0.55f , indicator.GlobalPosition.Z));
         MoveAndSlide();
     }
 
@@ -68,7 +68,6 @@ public partial class Player : Entity
 
         if (navigator.IsNavigationFinished()){
             indicator.Hide();
-            return;
         }
         Vector3 targetPos = navigator.GetNextPathPosition();
         Vector3 direction = GlobalPosition.DirectionTo(targetPos);
@@ -104,6 +103,11 @@ public partial class Player : Entity
     }
 
     public void Attack(Entity _target){
+        target = _target;
+        entityState = EntityState.Idle;
+        if (canAttack == false){
+            return;
+        }
         Attack attack = new Attack
         {
             damage = attackDamage,
@@ -115,8 +119,19 @@ public partial class Player : Entity
         instance.attack = attack;
         instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
         model.LookAt(target.GlobalPosition);
-        entityState = EntityState.Idle;
+        AttackTimer();
     }
 
+    void AttackTimer(){
+        canAttack = false;
+        Timer timer = new Timer();
+        AddChild(timer);
+        timer.Start(attackSpeed);
+        timer.Timeout += Reset;
+    }
+
+    void Reset(){
+        canAttack = true;
+    }
 
 }
