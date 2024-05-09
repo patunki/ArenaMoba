@@ -11,7 +11,6 @@ public partial class EntityTester : Entity
     {
         suunta = new Vector3(0,0,1);
         outline = GetNode<MeshInstance3D>("Model/Outline");
-        GD.Print(outline);
         outline.Hide();
     }
 
