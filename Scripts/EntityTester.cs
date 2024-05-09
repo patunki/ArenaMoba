@@ -32,7 +32,7 @@ public partial class EntityTester : Entity
             Switcher();
         }
         Velocity = suunta * speed;
-        //MoveAndSlide();
+        MoveAndSlide();
     }
 
     void OnAreaMouseEntered(){
