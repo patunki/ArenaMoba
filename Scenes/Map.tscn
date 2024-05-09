@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dhqhdpj8iy8g8"]
 
-[ext_resource type="PackedScene" uid="uid://0cewjlro303a" path="res://Scenes/Player.tscn" id="1_qv5ut"]
 [ext_resource type="Texture2D" uid="uid://bi061ijpthiv1" path="res://Assets/gaben.jpg" id="2_y44a5"]
+[ext_resource type="PackedScene" uid="uid://bkm7agvp2et53" path="res://Scenes/Client.tscn" id="3_1ea2i"]
 [ext_resource type="PackedScene" uid="uid://l62pcmckeabg" path="res://Scenes/EntityTester.tscn" id="3_31c25"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qw7nn"]
@@ -41,16 +41,6 @@ visible = false
 light_energy = 0.192
 light_indirect_energy = 0.192
 shadow_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("1_qv5ut")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.72751, 0.867445, 8.12307)
-axis_lock_linear_x = false
-axis_lock_linear_y = false
-axis_lock_linear_z = false
-axis_lock_angular_y = false
-motion_mode = 1
-attackSpeed = 2.0
-attackRange = 10.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(2.7, 0, 0, 0, 1, 0, 0, 0, 3.3, 0, 0, 0)
@@ -116,3 +106,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.64224, 0.562602, 1.7192)
 speed = 0.0
 maxHealth = 20.0
 health = 20.0
+
+[node name="Client" parent="." instance=ExtResource("3_1ea2i")]
+transform = Transform3D(-0.980587, 0, 0.196083, 0, 1, 0, -0.196083, 0, -0.980587, -6.11675, 0, 11.6174)

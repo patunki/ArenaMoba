@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkm7agvp2et53"]
+
+[ext_resource type="PackedScene" uid="uid://0cewjlro303a" path="res://Scenes/Player.tscn" id="1_fihyj"]
+
+[node name="Client" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_fihyj")]
+transform = Transform3D(-0.999991, 0, 0.00418868, 0, 1, 0, -0.00418868, 0, -0.999991, 0.273552, 0.867445, -3.30023)
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_y = false
+motion_mode = 1
+attackSpeed = 2.0
+attackRange = 10.0
+
+[node name="ClientCamera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-0.999585, -0.0106498, 0.0267522, 0.0206351, 0.383035, 0.923503, -0.0200821, 0.923672, -0.382657, 0.240603, 26.9428, -7.44712)
+current = true
