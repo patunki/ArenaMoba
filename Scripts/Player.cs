@@ -65,6 +65,7 @@ public partial class Player : Entity
         if (entityState == EntityState.Attacking && IsInstanceValid(target)){
             
             float distance = GlobalPosition.DistanceTo(target.GlobalPosition);
+            
             if (distance <= attackRange){
                 indicator.Hide();
                 Attack();

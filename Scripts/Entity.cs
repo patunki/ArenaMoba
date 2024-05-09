@@ -28,7 +28,7 @@ public partial class Entity : CharacterBody3D
 
     void OnAreaInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 norman, int shapeIdx){
         if (Input.IsActionJustPressed("RightClick")){
-            Player attacker = camera.GetParent().GetNode<Player>("Player");
+            Player attacker = (Player)camera.GetParent();
             attacker.BasicAttack(this);
         }
     }

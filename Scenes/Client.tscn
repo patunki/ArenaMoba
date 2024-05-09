@@ -7,18 +7,18 @@
 script = ExtResource("1_aic6x")
 
 [node name="Player" parent="." instance=ExtResource("1_fihyj")]
-transform = Transform3D(-0.999991, 0, 0.00418868, 0, 1, 0, -0.00418868, 0, -0.999991, 0.273552, 0.867445, -3.30023)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17989, 0)
 axis_lock_linear_x = false
 axis_lock_linear_y = false
 axis_lock_linear_z = false
 axis_lock_angular_y = false
 motion_mode = 1
-attackSpeed = 2.0
+attackSpeed = 0.64
 attackRange = 10.0
 
-[node name="ClientCamera" type="Camera3D" parent="."]
+[node name="ClientCamera" type="Camera3D" parent="Player"]
 unique_name_in_owner = true
-transform = Transform3D(-1, -8.21505e-08, 2.99004e-08, 0, 0.34202, 0.939693, -8.74228e-08, 0.939693, -0.34202, 0.240603, 22.5134, -2.90401)
+transform = Transform3D(1, 0, 0, 0, 0.700984, 0.713177, 0, -0.713177, 0.700984, 0, 18.4986, 14.459)
 
 [node name="Interface" type="CanvasLayer" parent="."]
 
