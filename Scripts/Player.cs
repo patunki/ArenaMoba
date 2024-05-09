@@ -21,7 +21,7 @@ public partial class Player : Entity
         dropPlane = new Plane(new Vector3(0,1,0));
         indicator = GetNode<MeshInstance3D>("UI/Cursor");
         model = GetNode<MeshInstance3D>("Model");
-        camera = GetNode<Camera3D>("Camera");
+        camera = GetNode<Camera3D>("%ClientCamera");
         navigator = GetNode<NavigationAgent3D>("Navigator");
         projectile = GD.Load<PackedScene>("res://Scenes/AttackProjectile.tscn");
         fireball = GD.Load<PackedScene>("res://Scenes/Fireball.tscn");

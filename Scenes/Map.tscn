@@ -107,5 +107,11 @@ speed = 0.0
 maxHealth = 20.0
 health = 20.0
 
+[node name="Entity3" parent="." instance=ExtResource("3_31c25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2803, 0.562602, 5.07366)
+speed = 0.0
+maxHealth = 20.0
+health = 20.0
+
 [node name="Client" parent="." instance=ExtResource("3_1ea2i")]
-transform = Transform3D(-0.980587, 0, 0.196083, 0, 1, 0, -0.196083, 0, -0.980587, -6.11675, 0, 11.6174)
+transform = Transform3D(-1, 0, 0.000279278, 0, 1, 0, -0.000279278, 0, -1, -6.11675, 0, 9.7183)

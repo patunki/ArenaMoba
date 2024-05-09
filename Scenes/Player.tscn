@@ -39,6 +39,3 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 transform = Transform3D(0.27, 0, 0, 0, 0.2, 0, 0, 0, -0.23, 0.000176907, 0.0910156, -0.0386295)
 mesh = SubResource("CylinderMesh_odeu7")
 skeleton = NodePath("../..")
-
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.666064, 0.745895, 0, -0.745895, 0.666064, 0, 12.7317, 9.98028)
