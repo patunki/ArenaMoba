@@ -8,10 +8,10 @@ public partial class Player : Entity
     MeshInstance3D model;
     Camera3D camera;
     NavigationAgent3D navigator;
-    Vector3 cursorPos;
     Entity target;
     PackedScene projectile;
     Node3D game;
+    Timer attackTimer;
 
     public EntityState entityState = EntityState.Idle;
 
@@ -25,113 +25,105 @@ public partial class Player : Entity
         projectile = GD.Load<PackedScene>("res://Scenes/AttackProjectile.tscn");
         game = GetNode<Node3D>("/root/Map");
         indicator.Hide();
+        attackTimer = new Timer();
+        AddChild(attackTimer);
+
+        attackTimer.Timeout += ResetAttackTimer;
     }
 
     public override void _Process(double delta)
     {
-        if (entityState == EntityState.Idle){
-            MoveLoop();
-        }
-        if (entityState == EntityState.Attacking && target != null){
-            AttackMoveLoop();
-        }
-
-
-        
+        MoveLoop();
     }
 
     public override void _Input(InputEvent @event)
     {
         if (Input.IsActionJustPressed("RightClick")){
             navigator.PathDesiredDistance = 0.2f;
-            GetCursorPos();
-            indicator.GlobalPosition = cursorPos;
-            navigator.TargetPosition = cursorPos;
+            Vector3 clickPos = GetCursorPos();
+            indicator.GlobalPosition = clickPos;
+            navigator.TargetPosition = clickPos;
             indicator.Show();
         }
     }
 
     void MoveLoop(){
 
+        Vector3 direction = GlobalPosition.DirectionTo(navigator.GetNextPathPosition());
+
+        if (entityState == EntityState.Attacking && IsInstanceValid(target)){
+            
+            float distance = GlobalPosition.DistanceTo(target.GlobalPosition);
+            if (distance <= attackRange){
+                indicator.Hide();
+                Attack();
+            } else {
+                navigator.TargetPosition = target.GlobalPosition;
+                navigator.PathDesiredDistance = attackRange;
+                Velocity = direction * speed;
+                MoveAndSlide();
+            }
+          
+        } else {
+            entityState = EntityState.Idle;
+        }
+
         if (navigator.IsNavigationFinished()){
             indicator.Hide();
             return;
         }
-        Vector3 targetPos = navigator.GetNextPathPosition();
-        Vector3 direction = GlobalPosition.DirectionTo(targetPos);
-        Velocity = direction * speed;
-        model.LookAt(new Vector3(indicator.GlobalPosition.X, 0.55f , indicator.GlobalPosition.Z));
-        MoveAndSlide();
+        if (entityState == EntityState.Idle){
+            Velocity = direction * speed;
+            model.LookAt(new Vector3(indicator.GlobalPosition.X, 0.55f , indicator.GlobalPosition.Z));
+            MoveAndSlide();
+        } 
+
     }
 
-    void AttackMoveLoop(){
-
-        if (navigator.IsNavigationFinished()){
-            indicator.Hide();
-        }
-        Vector3 targetPos = navigator.GetNextPathPosition();
-        Vector3 direction = GlobalPosition.DirectionTo(targetPos);
-        Velocity = direction * speed;
-        MoveAndSlide();
-        float distance = GlobalPosition.DistanceTo(target.GlobalPosition);
-        if (distance <= attackRange){
-            Attack(target);
-        }  
-        
-    }
 
     Vector3 GetCursorPos(){
-        Vector2 mousePos = GetViewport().GetMousePosition();
-        Vector3 ray = camera.ProjectRayNormal(mousePos);
-        cursorPos = (Vector3)dropPlane.IntersectsRay(camera.GlobalPosition,ray);
+        Vector3 ray = camera.ProjectRayNormal(GetViewport().GetMousePosition());
+        Vector3 cursorPos = (Vector3)dropPlane.IntersectsRay(camera.GlobalPosition,ray);
+        entityState = EntityState.Idle;
         return cursorPos;
     }
 
     public void BasicAttack(Entity _target){
         target = _target;
         entityState = EntityState.Attacking;
-        float distance = GlobalPosition.DistanceTo(_target.GlobalPosition);
-        Vector3 dir = GlobalPosition.DirectionTo(_target.GlobalPosition);
-        navigator.PathDesiredDistance = attackRange;
-        if (distance <= attackRange){
-            Attack(_target);
-        }   
+        navigator.PathDesiredDistance = attackRange; 
     }
 
     public void TakeDamage(){
         return;
     }
 
-    public void Attack(Entity _target){
-        target = _target;
-        entityState = EntityState.Idle;
-        if (canAttack == false){
-            return;
+    public void Attack(){
+        
+        if (canAttack == true && GlobalPosition.DistanceTo(target.GlobalPosition) <= attackRange){
+            canAttack = false;
+            Attack attack = new Attack
+            {
+                damage = attackDamage,
+                attackType = AttackType.Ranged
+            };
+            AttackProjectile instance = (AttackProjectile)projectile.Instantiate();
+            game.AddChild(instance);
+            instance.target = target;
+            instance.attack = attack;
+            instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
+            model.LookAt(target.GlobalPosition);
+            attackTimer.Start(attackSpeed);           
         }
-        Attack attack = new Attack
-        {
-            damage = attackDamage,
-            attackType = AttackType.Ranged
-        };
-        AttackProjectile instance = (AttackProjectile)projectile.Instantiate();
-        game.AddChild(instance);
-        instance.target = target;
-        instance.attack = attack;
-        instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
-        model.LookAt(target.GlobalPosition);
-        AttackTimer();
+        return;
     }
 
-    void AttackTimer(){
-        canAttack = false;
-        Timer timer = new Timer();
-        AddChild(timer);
-        timer.Start(attackSpeed);
-        timer.Timeout += Reset;
-    }
-
-    void Reset(){
+    void ResetAttackTimer(){
         canAttack = true;
     }
 
 }
+
+//float distance = GlobalPosition.DistanceTo(_target.GlobalPosition);
+//Vector3 dir = GlobalPosition.DirectionTo(_target.GlobalPosition);
+//Vector3 targetPos = navigator.GetNextPathPosition();

@@ -30,6 +30,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ejvqd")
 shape = SubResource("BoxShape3D_mdyo8")
 
 [node name="Navigator" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="UI" type="CanvasLayer" parent="."]
 

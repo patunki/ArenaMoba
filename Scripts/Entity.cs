@@ -35,13 +35,13 @@ public partial class Entity : CharacterBody3D
 
     public void TakeDamage(Attack attack){
         health -= attack.damage;
-        GD.Print("health: ", health);
+        //GD.Print("health: ", health);
             if (health <= 0){
-                GD.Print("damage: ", attack.damage);
-                GD.Print (Name," Dead");
+                //GD.Print("damage: ", attack.damage);
+                //GD.Print (Name," Dead");
                 QueueFree();
             }else{
-                GD.Print("damage: ", attack.damage);
+                //GD.Print("damage: ", attack.damage);
             }
     }
 

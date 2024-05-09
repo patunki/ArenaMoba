@@ -28,7 +28,7 @@ public partial class EntityTester : Entity
     public override void _Process(double delta)
     {
         count++;
-        if (count >= 200){
+        if (count >= 400){
             Switcher();
         }
         Velocity = suunta * speed;
