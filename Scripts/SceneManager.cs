@@ -15,6 +15,8 @@ public partial class SceneManager : Node3D
 		foreach (var item in GameManager.Players)
 		{
 			Client currentPlayer = playerScene.Instantiate<Client>();
+			currentPlayer.Name = item.Id.ToString();
+			currentPlayer.SetUpPlayer(item.Name);
 			AddChild(currentPlayer);
 			foreach (Node3D spawnPoint in GetTree().GetNodesInGroup("PlayerSpawnPoints"))
 			{

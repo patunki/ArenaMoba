@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkm7agvp2et53"]
+[gd_scene load_steps=4 format=3 uid="uid://bkm7agvp2et53"]
 
 [ext_resource type="PackedScene" uid="uid://0cewjlro303a" path="res://Scenes/Player.tscn" id="1_fihyj"]
 [ext_resource type="Script" path="res://Scripts/Client.cs" id="1_trepn"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yuadh"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Player:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Client" type="Node3D"]
 script = ExtResource("1_trepn")
@@ -17,6 +25,12 @@ attackSpeed = 0.64
 attackRange = 10.0
 
 [node name="ClientCamera" type="Camera3D" parent="Player"]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.700984, 0.713177, 0, -0.713177, 0.700984, 0, 18.4986, 14.459)
 fov = 40.7
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yuadh")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

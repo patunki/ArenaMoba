@@ -6,13 +6,14 @@ public partial class Player : Entity
     Plane dropPlane;
     MeshInstance3D indicator;
     MeshInstance3D model;
-    Camera3D camera;
+    public Camera3D camera;
     NavigationAgent3D navigator;
     Entity target;
     PackedScene projectile;
     PackedScene fireball;
     Node3D game;
     Timer attackTimer;
+    public bool Auth;
 
     public EntityState entityState = EntityState.Idle;
 
@@ -21,7 +22,7 @@ public partial class Player : Entity
         dropPlane = new Plane(new Vector3(0,1,0));
         indicator = GetNode<MeshInstance3D>("UI/Cursor");
         model = GetNode<MeshInstance3D>("Model");
-        camera = GetNode<Camera3D>("%ClientCamera");
+        camera = GetNode<Camera3D>("ClientCamera");
         navigator = GetNode<NavigationAgent3D>("Navigator");
         projectile = GD.Load<PackedScene>("res://Scenes/AttackProjectile.tscn");
         fireball = GD.Load<PackedScene>("res://Scenes/Fireball.tscn");
@@ -29,33 +30,35 @@ public partial class Player : Entity
         indicator.Hide();
         attackTimer = new Timer();
         AddChild(attackTimer);
-
         attackTimer.Timeout += ResetAttackTimer;
     }
 
-    public override void _Process(double delta)
+    public void FrameCall(double delta)
     {
         MoveLoop();
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (Input.IsActionJustPressed("RightClick")){
-            navigator.PathDesiredDistance = 0.2f;
-            Vector3 clickPos = GetCursorPos();
-            indicator.GlobalPosition = clickPos;
-            navigator.TargetPosition = clickPos;
-            indicator.Show();
+        if (Auth == true){
+            if (Input.IsActionJustPressed("RightClick")){
+                navigator.PathDesiredDistance = 0.2f;
+                Vector3 clickPos = GetCursorPos();
+                indicator.GlobalPosition = clickPos;
+                navigator.TargetPosition = clickPos;
+                indicator.Show();
+            }
+
+            if (Input.IsActionJustPressed("Q")){
+                Vector3 dir = GlobalPosition.DirectionTo(GetCursorPos());
+                Fireball instance = (Fireball)fireball.Instantiate();
+                instance.host = this;
+                game.AddChild(instance);
+                instance.direction = GlobalPosition.DirectionTo(GetCursorPos());
+                instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
+            }
         }
 
-        if (Input.IsActionJustPressed("Q")){
-            Vector3 dir = GlobalPosition.DirectionTo(GetCursorPos());
-            Fireball instance = (Fireball)fireball.Instantiate();
-            instance.host = this;
-            game.AddChild(instance);
-            instance.direction = GlobalPosition.DirectionTo(GetCursorPos());
-            instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
-        }
     }
 
     void MoveLoop(){
@@ -112,7 +115,7 @@ public partial class Player : Entity
 
     public void Attack(){
         
-        if (canAttack == true && GlobalPosition.DistanceTo(target.GlobalPosition) <= attackRange){
+        if (canAttack == true && GlobalPosition.DistanceTo(target.GlobalPosition) <= attackRange && Auth == true){
             canAttack = false;
             Attack attack = new Attack
             {

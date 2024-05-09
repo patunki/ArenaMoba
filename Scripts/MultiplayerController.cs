@@ -95,6 +95,7 @@ public partial class MultiplayerController : Control
 	private void StartGame(){
 		var scene = ResourceLoader.Load<PackedScene>("res://Scenes/Map.tscn").Instantiate<Node3D>();
 		GetTree().Root.AddChild(scene);
+        this.Hide();
 		
 	}
 
