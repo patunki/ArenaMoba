@@ -17,7 +17,7 @@ public partial class Player : Entity
 
     public EntityState entityState = EntityState.Idle;
 
-    public override void _Ready()
+    public void Setup()
     {
         dropPlane = new Plane(new Vector3(0,1,0));
         indicator = GetNode<MeshInstance3D>("UI/Cursor");
@@ -50,7 +50,7 @@ public partial class Player : Entity
             }
 
             if (Input.IsActionJustPressed("Q")){
-                Rpc("MpQ");
+                Rpc("MpQ", GlobalPosition ,GlobalPosition.DirectionTo(GetCursorPos()));
             }
         }
 
@@ -132,13 +132,12 @@ public partial class Player : Entity
         canAttack = true;
     }
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-    private void MpQ(){
-        Vector3 dir = GlobalPosition.DirectionTo(GetCursorPos());
+    private void MpQ(Vector3 start, Vector3 dir){
         Fireball instance = (Fireball)fireball.Instantiate();
         instance.host = this;
         game.AddChild(instance);
-        instance.direction = GlobalPosition.DirectionTo(GetCursorPos());
-        instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
+        instance.direction = dir;
+        instance.GlobalPosition = start;
     }
 
 }

@@ -24,7 +24,19 @@ public partial class Entity : CharacterBody3D
     [Export]
     public float attackDamage = 5;
 
+    bool alive = true;
+
     public bool canAttack = true;
+
+    public override void _Ready()
+    {
+        Multiplayer.GetUniqueId();
+    }
+
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    public virtual void MpDie(){
+        
+    }
 
     void OnAreaInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 norman, int shapeIdx){
         if (Input.IsActionJustPressed("RightClick")){
@@ -35,13 +47,11 @@ public partial class Entity : CharacterBody3D
 
     public void TakeDamage(Attack attack){
         health -= attack.damage;
-        //GD.Print("health: ", health);
             if (health <= 0){
-                //GD.Print("damage: ", attack.damage);
-                //GD.Print (Name," Dead");
-                QueueFree();
+                alive = false;
+                Rpc("MpDie");
             }else{
-                //GD.Print("damage: ", attack.damage);
+
             }
     }
 

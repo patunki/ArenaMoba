@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://l62pcmckeabg"]
+[gd_scene load_steps=10 format=3 uid="uid://l62pcmckeabg"]
 
 [ext_resource type="Script" path="res://Scripts/EntityTester.cs" id="1_dxxhs"]
 [ext_resource type="Texture2D" uid="uid://cakg60mvtuc3p" path="res://Assets/ksnip_20231203-044818.png" id="2_4dlf0"]
@@ -29,6 +29,11 @@ _surfaces = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gre01"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yolbs"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Entity" type="CharacterBody3D"]
 script = ExtResource("1_dxxhs")
 
@@ -47,6 +52,9 @@ mesh = SubResource("ArrayMesh_fsnry")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_gre01")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yolbs")
 
 [connection signal="input_event" from="Area3D" to="." method="OnAreaInputEvent"]
 [connection signal="mouse_entered" from="Area3D" to="." method="OnAreaMouseEntered"]

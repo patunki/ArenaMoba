@@ -14,6 +14,12 @@ public partial class EntityTester : Entity
         outline.Hide();
     }
 
+    public override void MpDie()
+    {
+        Hide();
+        Dispose();
+    }
+
     void Switcher(){
         dires = !dires;
         if (dires){

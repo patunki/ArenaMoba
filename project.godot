@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="ArenaMoba"
-run/main_scene="res://Scenes/Map.tscn"
+config/name="ArenaMobaRework"
+run/main_scene="res://Scenes/Menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 
 [autoload]
