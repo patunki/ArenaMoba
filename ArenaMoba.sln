@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArenaMoba", "ArenaMoba.csproj", "{8C7E3F10-600F-41D7-A464-5CD4092C39BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArenaMoba", "ArenaMoba.csproj", "{9E83275D-B7B7-4FEC-B616-05540D10316D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8C7E3F10-600F-41D7-A464-5CD4092C39BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C7E3F10-600F-41D7-A464-5CD4092C39BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C7E3F10-600F-41D7-A464-5CD4092C39BD}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{8C7E3F10-600F-41D7-A464-5CD4092C39BD}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{8C7E3F10-600F-41D7-A464-5CD4092C39BD}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{8C7E3F10-600F-41D7-A464-5CD4092C39BD}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{9E83275D-B7B7-4FEC-B616-05540D10316D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E83275D-B7B7-4FEC-B616-05540D10316D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E83275D-B7B7-4FEC-B616-05540D10316D}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{9E83275D-B7B7-4FEC-B616-05540D10316D}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{9E83275D-B7B7-4FEC-B616-05540D10316D}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{9E83275D-B7B7-4FEC-B616-05540D10316D}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

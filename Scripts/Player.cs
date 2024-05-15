@@ -34,6 +34,8 @@ public partial class Player : Entity
         attackTimer = new Timer();
         AddChild(attackTimer);
         attackTimer.Timeout += ResetAttackTimer;
+        entityIndex = Multiplayer.GetUniqueId();
+        attackRange = 20;
     }
 
     public void FrameCall(double delta)
@@ -70,11 +72,17 @@ public partial class Player : Entity
 
         if (entityState == EntityState.Attacking && IsInstanceValid(target)){
             
-            float distance = GlobalPosition.DistanceTo(target.GlobalPosition);
-            
-            if (distance <= attackRange){
+            //float distance = GlobalPosition.DistanceTo(target.GlobalPosition);
+            if (canAttack == true && GlobalPosition.DistanceTo(target.GlobalPosition) <= attackRange){
                 indicator.Hide();
-                Attack();
+                int targetId = target.entityIndex;
+                attackTimer.Start();
+                canAttack = false;
+                Rpc("Attack", targetId, GlobalPosition);
+                canAttack = false;
+                model.LookAt(target.GlobalPosition);
+                attackTimer.Start(attackSpeed);
+                return;           
             } else {
                 navigator.TargetPosition = target.GlobalPosition;
                 navigator.PathDesiredDistance = attackRange;
@@ -115,25 +123,27 @@ public partial class Player : Entity
     public void TakeDamage(){
         return;
     }
-
-    public void Attack(){
-        
-        if (canAttack == true && GlobalPosition.DistanceTo(target.GlobalPosition) <= attackRange){
-            canAttack = false;
-            Attack attack = new Attack
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+    public void Attack(int Id, Vector3 start){
+        Entity targetEntity;
+        Attack attack = new Attack
             {
                 damage = attackDamage,
                 attackType = AttackType.Ranged,
             };
-            AttackProjectile instance = (AttackProjectile)projectile.Instantiate();
-            game.AddChild(instance);
-            instance.target = target;
-            instance.attack = attack;
-            instance.GlobalPosition = GlobalPosition + new Vector3(0,1,0);
-            model.LookAt(target.GlobalPosition);
-            attackTimer.Start(attackSpeed);           
-        }
+            foreach (Entity entity in GetTree().GetNodesInGroup("Entity")){
+                if (entity.entityIndex == Id){
+                    targetEntity = entity;
+                    AttackProjectile instance = (AttackProjectile)projectile.Instantiate();
+                    game.AddChild(instance);
+                    instance.GlobalPosition = start;
+                    instance.target = targetEntity;
+                    instance.attack = attack;
+                }
+            }     
+
         return;
+
     }
 
     void ResetAttackTimer(){

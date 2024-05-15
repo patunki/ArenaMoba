@@ -9,6 +9,7 @@ public enum EntityState {
 
 public partial class Entity : CharacterBody3D
 {
+    public int entityIndex;
     [Export]
     public float speed = 10;
     [Export]
@@ -31,6 +32,8 @@ public partial class Entity : CharacterBody3D
     public override void _Ready()
     {
         Multiplayer.GetUniqueId();
+        entityIndex = GetIndex();
+        GD.Print("entity index: ", entityIndex);
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]

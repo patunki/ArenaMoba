@@ -14,6 +14,7 @@ public partial class EntityTester : Entity
         suunta = new Vector3(0,0,1);
         outline = GetNode<MeshInstance3D>("Model/Outline");
         outline.Hide();
+        entityIndex = GetIndex();
     }
 
     public override void MpDie()

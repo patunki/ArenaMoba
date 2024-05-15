@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="ArenaMobaRework"
+config/name="ArenaMobaScrapPlayer"
 run/main_scene="res://Scenes/Menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 

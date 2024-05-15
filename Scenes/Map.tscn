@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhqhdpj8iy8g8"]
+[gd_scene load_steps=13 format=3 uid="uid://dhqhdpj8iy8g8"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_0rrl2"]
 [ext_resource type="PackedScene" uid="uid://bkm7agvp2et53" path="res://Scenes/Client.tscn" id="2_a0ftl"]
@@ -30,8 +30,6 @@ albedo_texture = ExtResource("2_y44a5")
 [sub_resource type="BoxShape3D" id="BoxShape3D_gx7k1"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_e2m4p"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v6c2m"]
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_0rrl2")
@@ -131,7 +129,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6332, 0.308617, 0)
 
 [node name="1" type="Node3D" parent="PlayerSpawnPoints" groups=["PlayerSpawnPoints"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1941, 0, -2.94325)
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_v6c2m")
-public_visibility = false

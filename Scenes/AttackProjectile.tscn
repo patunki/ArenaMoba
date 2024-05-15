@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bc64widv31rgc"]
+[gd_scene load_steps=7 format=3 uid="uid://bc64widv31rgc"]
 
 [ext_resource type="Script" path="res://Scripts/AttackProjectile.cs" id="1_xqrov"]
 [ext_resource type="Texture2D" uid="uid://c5vtb56pxhhvu" path="res://Assets/edw7f7lvzu3c1.jpeg" id="2_vyd7y"]
@@ -16,6 +16,11 @@ height = 0.5
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbpey"]
 radius = 0.108829
 height = 0.346587
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1vx7g"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="AttackProjectile" type="CharacterBody3D"]
 script = ExtResource("1_xqrov")
@@ -35,7 +40,7 @@ transform = Transform3D(-0.979382, -0.08723, 0.182217, -0.179975, -0.0329807, -0
 shape = SubResource("CapsuleShape3D_hbpey")
 disabled = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1vx7g")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="OnHurtboxBodyEntered"]

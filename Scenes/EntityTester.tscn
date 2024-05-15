@@ -34,7 +34,7 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="Entity" type="CharacterBody3D"]
+[node name="Entity" type="CharacterBody3D" groups=["Entity"]]
 script = ExtResource("1_dxxhs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
