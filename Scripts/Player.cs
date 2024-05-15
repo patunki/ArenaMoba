@@ -159,6 +159,11 @@ public partial class Player : Entity
         instance.GlobalPosition = start;
     }
 
+    public override void MpDie()
+    {
+        
+    }
+
 }
 
 //float distance = GlobalPosition.DistanceTo(_target.GlobalPosition);

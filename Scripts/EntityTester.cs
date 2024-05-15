@@ -19,7 +19,7 @@ public partial class EntityTester : Entity
 
     public override void MpDie()
     {
-        //sync.QueueFree();
+        sync.QueueFree();
         Hide();
         Dispose();
     }
