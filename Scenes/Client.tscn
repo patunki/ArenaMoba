@@ -12,7 +12,7 @@ properties/0/replication_mode = 1
 script = ExtResource("1_trepn")
 
 [node name="Player" parent="." instance=ExtResource("1_fihyj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17989, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0658191, 0)
 axis_lock_linear_x = false
 axis_lock_linear_y = false
 axis_lock_linear_z = false

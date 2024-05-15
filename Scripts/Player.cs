@@ -116,7 +116,6 @@ public partial class Player : Entity
     public void BasicAttack(Entity _target){
         target = _target;
         entityState = EntityState.Attacking;
-        navigator.PathDesiredDistance = attackRange; 
     }
 
     public void TakeDamage(){
