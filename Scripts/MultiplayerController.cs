@@ -13,10 +13,18 @@ public partial class MultiplayerController : Control
     private int _maxPlayerCount = 2;
     private ENetMultiplayerPeer _peer;
     CanvasLayer canvasLayer;
+    ItemList playerList;
+    LineEdit nameBox;
+    TextEdit warning;
+    GameManager gameManager;
 
 
     public override void _Ready()
     {
+        gameManager = GetNode<GameManager>("/root/GameManager");
+        warning = GetNode<TextEdit>("CanvasLayer/WarningBox");
+        nameBox = GetNode<LineEdit>("CanvasLayer/LineEdit");
+        playerList = GetNode<ItemList>("CanvasLayer/PlayerList");
         canvasLayer = GetNode<CanvasLayer>("CanvasLayer");
         Multiplayer.PeerConnected += PlayerConnected;
         Multiplayer.PeerDisconnected += PlayerDisconnected;
@@ -35,7 +43,7 @@ public partial class MultiplayerController : Control
         GD.Print("Connection SUCCESSFULL.");
 
         int playerId = Multiplayer.GetUniqueId();
-        RpcId(1, "SendPlayerInformation", GetNode<LineEdit>("LineEdit").Text, Multiplayer.GetUniqueId());
+        RpcId(1, "SendPlayerInformation", nameBox.Text, Multiplayer.GetUniqueId());
     }
 
 
@@ -53,7 +61,7 @@ public partial class MultiplayerController : Control
         _peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
         Multiplayer.MultiplayerPeer = _peer;
         GD.Print("Waiting for players to connect ...");
-        SendPlayerInformation(GetNode<LineEdit>("LineEdit").Text, 1);
+        SendPlayerInformation(nameBox.Text, 1);
     }
 
     private void PlayerConnected(long id)
@@ -68,7 +76,11 @@ public partial class MultiplayerController : Control
     }
 
     public void OnHostButtonDown(){
-        HostGame();
+        if (nameBox.Text.Length < 1){
+            warning.Show();
+        } else {
+            HostGame();
+        }
     }
     
     void OnStartButtonDown(){
@@ -90,7 +102,12 @@ public partial class MultiplayerController : Control
 
     public void OnJoinButtonDown()
     {
-        ConnectToServer();
+        if (nameBox.Text.Length < 1){
+            warning.Show();
+        } else {
+            ConnectToServer();
+        }
+
     }
     
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
@@ -99,7 +116,7 @@ public partial class MultiplayerController : Control
 		GetTree().Root.AddChild(scene);
         canvasLayer.Hide();
         Hide();
-		
+		gameManager.StartGame();
 	}
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
@@ -108,6 +125,8 @@ public partial class MultiplayerController : Control
 			Name = name,
 			Id = id
 		};
+
+        playerList.AddItem(playerInfo.Name);
 
         if(!GameManager.Players.Contains(playerInfo)){
 			

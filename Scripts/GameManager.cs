@@ -7,13 +7,29 @@ public partial class GameManager : Node
 {
 
 	public static List<PlayerInfo> Players = new List<PlayerInfo>();
-	// Called when the node enters the scene tree for the first time.
+	Node3D game;
 	public override void _Ready()
 	{
+		Multiplayer.GetUniqueId();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public void StartGame(){
+		game = GetNode<Node3D>("/root/Map");
+	}
 	public override void _Process(double delta)
 	{
 	}
+
+	/*public void AutoAttack(Attack _attack){
+		Rpc("Execute", _attack);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	void Execute(Attack attack){
+		AttackProjectile instance = (AttackProjectile)attack.attackProjectile.Instantiate();
+        game.AddChild(instance);
+        instance.target = attack.target;
+        instance.attack = attack;
+        instance.GlobalPosition = attack.host.GlobalPosition + new Vector3(0,1,0);
+	}*/
 }

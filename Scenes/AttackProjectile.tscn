@@ -35,4 +35,7 @@ transform = Transform3D(-0.979382, -0.08723, 0.182217, -0.179975, -0.0329807, -0
 shape = SubResource("CapsuleShape3D_hbpey")
 disabled = true
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
 [connection signal="body_entered" from="Hurtbox" to="." method="OnHurtboxBodyEntered"]

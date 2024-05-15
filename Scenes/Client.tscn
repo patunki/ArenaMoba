@@ -25,9 +25,19 @@ attackRange = 10.0
 transform = Transform3D(1, 0, 0, 0, 0.604599, 0.79653, 0, -0.79653, 0.604599, 0, 18.4986, 14.459)
 fov = 55.7
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_nex62")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="Interface"]
+anchors_preset = -1
+anchor_left = 0.005
+anchor_top = 0.007
+anchor_right = 0.005
+anchor_bottom = 0.007
+offset_left = 0.4
+offset_top = -1.56
+offset_right = 118.4
+offset_bottom = 54.44
+theme_override_font_sizes/font_size = 30

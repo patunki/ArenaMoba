@@ -13,6 +13,7 @@ public partial class Player : Entity
     PackedScene fireball;
     Node3D game;
     Timer attackTimer;
+    GameManager gameManager;
     public bool Auth;
 
     public EntityState entityState = EntityState.Idle;
@@ -28,6 +29,7 @@ public partial class Player : Entity
         projectile = GD.Load<PackedScene>("res://Scenes/AttackProjectile.tscn");
         fireball = GD.Load<PackedScene>("res://Scenes/Fireball.tscn");
         game = GetNode<Node3D>("/root/Map");
+        gameManager = GetNode<GameManager>("/root/GameManager");
         indicator.Hide();
         attackTimer = new Timer();
         AddChild(attackTimer);
@@ -116,12 +118,12 @@ public partial class Player : Entity
 
     public void Attack(){
         
-        if (canAttack == true && GlobalPosition.DistanceTo(target.GlobalPosition) <= attackRange && Auth == true){
+        if (canAttack == true && GlobalPosition.DistanceTo(target.GlobalPosition) <= attackRange){
             canAttack = false;
             Attack attack = new Attack
             {
                 damage = attackDamage,
-                attackType = AttackType.Ranged
+                attackType = AttackType.Ranged,
             };
             AttackProjectile instance = (AttackProjectile)projectile.Instantiate();
             game.AddChild(instance);

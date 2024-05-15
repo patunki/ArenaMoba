@@ -7,8 +7,10 @@ public partial class EntityTester : Entity
     Vector3 suunta;
     int count = 0;
     MeshInstance3D outline;
+    MultiplayerSynchronizer sync;
     public override void _Ready()
     {
+        sync = GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer");
         suunta = new Vector3(0,0,1);
         outline = GetNode<MeshInstance3D>("Model/Outline");
         outline.Hide();
@@ -16,6 +18,7 @@ public partial class EntityTester : Entity
 
     public override void MpDie()
     {
+        //sync.QueueFree();
         Hide();
         Dispose();
     }

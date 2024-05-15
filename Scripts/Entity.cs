@@ -35,7 +35,7 @@ public partial class Entity : CharacterBody3D
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
     public virtual void MpDie(){
-        
+
     }
 
     void OnAreaInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 norman, int shapeIdx){
