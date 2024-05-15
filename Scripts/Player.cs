@@ -106,8 +106,6 @@ public partial class Player : Entity
 
     }
 
-
-
     Vector3 GetCursorPos(){
         Vector3 ray = camera.ProjectRayNormal(GetViewport().GetMousePosition());
         Vector3 cursorPos = (Vector3)dropPlane.IntersectsRay(camera.GlobalPosition,ray);
@@ -124,6 +122,7 @@ public partial class Player : Entity
     public void TakeDamage(){
         return;
     }
+    
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     public void Attack(int Id, Vector3 start){
         Entity targetEntity;
@@ -132,16 +131,12 @@ public partial class Player : Entity
                 damage = attackDamage,
                 attackType = AttackType.Ranged,
             };
-            foreach (Entity entity in GetTree().GetNodesInGroup("Entity")){
-                if (entity.entityIndex == Id){
-                    targetEntity = entity;
-                    AttackProjectile instance = (AttackProjectile)projectile.Instantiate();
-                    game.AddChild(instance);
-                    instance.GlobalPosition = start;
-                    instance.target = targetEntity;
-                    instance.attack = attack;
-                }
-            }     
+        targetEntity = GetEntityById(Id);
+        AttackProjectile instance = (AttackProjectile)projectile.Instantiate();
+        game.AddChild(instance);
+        instance.GlobalPosition = start;
+        instance.target = targetEntity;
+        instance.attack = attack;
 
         return;
 
@@ -150,6 +145,7 @@ public partial class Player : Entity
     void ResetAttackTimer(){
         canAttack = true;
     }
+    
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void MpQ(Vector3 start, Vector3 dir){
         Fireball instance = (Fireball)fireball.Instantiate();

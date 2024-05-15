@@ -58,5 +58,14 @@ public partial class Entity : CharacterBody3D
             }
     }
 
+    public Entity GetEntityById(int id){
+        foreach (Entity entity in GetTree().GetNodesInGroup("Entity")){
+            if (entity.entityIndex == id){
+                return entity;
+            }
+        }
+        return null; 
+    }
+
 
 }
