@@ -17,7 +17,8 @@ public partial class Player : Entity
 
     public EntityState entityState = EntityState.Idle;
 
-    public void Setup()
+
+    public override void _Ready()
     {
         dropPlane = new Plane(new Vector3(0,1,0));
         indicator = GetNode<MeshInstance3D>("UI/Cursor");
@@ -51,6 +52,11 @@ public partial class Player : Entity
 
             if (Input.IsActionJustPressed("Q")){
                 Rpc("MpQ", GlobalPosition ,GlobalPosition.DirectionTo(GetCursorPos()));
+            }
+
+            if (Input.IsActionJustPressed("S")){
+                navigator.TargetPosition = GlobalPosition;
+                entityState = EntityState.Idle;
             }
         }
 

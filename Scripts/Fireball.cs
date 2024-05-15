@@ -18,8 +18,12 @@ public partial class Fireball : CharacterBody3D
 	public override void _Ready()
 	{
 		timer = GetNode<Timer>("Timer");
-        timer.Timeout += QueueFree;
+        timer.Timeout += DespawnObject;
 		
+	}
+
+	void DespawnObject(){
+		QueueFree();
 	}
 
 	public override void _Process(double delta)
@@ -41,7 +45,7 @@ public partial class Fireball : CharacterBody3D
             };
             Entity entity = node3D as Entity;
             entity.TakeDamage(attack);
-            QueueFree();
+            DespawnObject();
         }
 	}
 }

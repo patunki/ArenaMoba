@@ -29,7 +29,7 @@ _surfaces = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gre01"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yolbs"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_384th"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
@@ -54,7 +54,7 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_gre01")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_yolbs")
+replication_config = SubResource("SceneReplicationConfig_384th")
 
 [connection signal="input_event" from="Area3D" to="." method="OnAreaInputEvent"]
 [connection signal="mouse_entered" from="Area3D" to="." method="OnAreaMouseEntered"]

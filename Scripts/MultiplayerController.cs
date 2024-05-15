@@ -12,10 +12,12 @@ public partial class MultiplayerController : Control
     [Export]
     private int _maxPlayerCount = 2;
     private ENetMultiplayerPeer _peer;
+    CanvasLayer canvasLayer;
 
 
     public override void _Ready()
     {
+        canvasLayer = GetNode<CanvasLayer>("CanvasLayer");
         Multiplayer.PeerConnected += PlayerConnected;
         Multiplayer.PeerDisconnected += PlayerDisconnected;
         Multiplayer.ConnectedToServer += ConnectedToServer;
@@ -95,7 +97,8 @@ public partial class MultiplayerController : Control
 	private void StartGame(){
 		var scene = ResourceLoader.Load<PackedScene>("res://Scenes/Map.tscn").Instantiate<Node3D>();
 		GetTree().Root.AddChild(scene);
-        this.Hide();
+        canvasLayer.Hide();
+        Hide();
 		
 	}
 

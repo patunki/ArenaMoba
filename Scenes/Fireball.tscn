@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://drsgjhecsi4h5"]
+[gd_scene load_steps=13 format=3 uid="uid://drsgjhecsi4h5"]
 
 [ext_resource type="Script" path="res://Scripts/Fireball.cs" id="2_nguan"]
 
@@ -130,6 +130,11 @@ shadow_mesh = SubResource("ArrayMesh_dwjv7")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ebevh"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jbi4t"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Fireball" type="CharacterBody3D"]
 axis_lock_linear_y = true
 script = ExtResource("2_nguan")
@@ -161,5 +166,8 @@ shape = SubResource("SphereShape3D_ebevh")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_ebevh")
 disabled = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jbi4t")
 
 [connection signal="body_entered" from="Area3D" to="." method="OnHurtboxBodyEntered"]

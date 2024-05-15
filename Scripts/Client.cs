@@ -15,10 +15,10 @@ public partial class Client : Node3D
         player = GetNode<Player>("Player");
         GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").SetMultiplayerAuthority(int.Parse(Name));
         if(GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() == Multiplayer.GetUniqueId()){
-            player.Setup();
             player.Auth = true;
             player.camera.Current = true;
         } else {
+            player.camera.Current = false;
             player.Auth = false;
         }
     }
