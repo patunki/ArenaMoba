@@ -35,7 +35,6 @@ public partial class Player : Entity
         AddChild(attackTimer);
         attackTimer.Timeout += ResetAttackTimer;
         entityIndex = Multiplayer.GetUniqueId();
-        attackRange = 20;
     }
 
     public void FrameCall(double delta)
@@ -72,17 +71,18 @@ public partial class Player : Entity
 
         if (entityState == EntityState.Attacking && IsInstanceValid(target)){
             
-            //float distance = GlobalPosition.DistanceTo(target.GlobalPosition);
-            if (canAttack == true && GlobalPosition.DistanceTo(target.GlobalPosition) <= attackRange){
+            float distance = GlobalPosition.DistanceTo(target.GlobalPosition);
+            
+            if (distance <= attackRange){
+                if (!canAttack){
+                    return;
+                }
+                canAttack = false;
                 indicator.Hide();
                 int targetId = target.entityIndex;
-                attackTimer.Start();
-                canAttack = false;
-                Rpc("Attack", targetId, GlobalPosition);
-                canAttack = false;
-                model.LookAt(target.GlobalPosition);
                 attackTimer.Start(attackSpeed);
-                return;           
+                model.LookAt(target.GlobalPosition);
+                Rpc("Attack", targetId, GlobalPosition);
             } else {
                 navigator.TargetPosition = target.GlobalPosition;
                 navigator.PathDesiredDistance = attackRange;
@@ -105,6 +105,7 @@ public partial class Player : Entity
         } 
 
     }
+
 
 
     Vector3 GetCursorPos(){
